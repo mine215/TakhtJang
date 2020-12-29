@@ -1,0 +1,16 @@
+groups:
+  default:
+    options:
+      default: true
+    permissions:
+    - modifyworld.*
+  admin: {}
+schema-version: 1
+users:
+  fa835390-eacf-4ec5-9ed3-c01d1beb0f5e:
+    permissions:
+    - '*'
+    group:
+    - owner
+    options:
+      name: mine215
