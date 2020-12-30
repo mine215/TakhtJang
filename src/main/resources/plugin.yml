@@ -31,3 +31,6 @@ commands:
   party:
     description: Party command
     usage: /<command> <name>
+  echo:
+    description: Echo command
+    usage: /<command> <Message>

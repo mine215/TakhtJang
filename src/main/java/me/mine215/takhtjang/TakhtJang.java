@@ -36,6 +36,7 @@ public final class TakhtJang extends JavaPlugin {
         getCommand("play").setExecutor(new PlayCommand());
         getCommand("party").setExecutor(new PartyCommand());
         getCommand("p").setExecutor(new PartyCommand());
+        getCommand("echo").setExecutor(new EchoCommand());
 
         getServer().getPluginManager().registerEvents(new PlayerMoveEvent(config, this), this);
         getServer().getPluginManager().registerEvents(new InventoryClickEvent(config, this), this);
