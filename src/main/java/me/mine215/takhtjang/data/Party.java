@@ -30,7 +30,9 @@ public class Party {
 
     public boolean joinParty(Player target) {
         if (invites.contains(target)) {
-            try { new PartyData().getPartyFromMember(target).kickFromParty(target); } catch (NullPointerException ignored) { }
+            if (new PartyData().getPartyFromMember(target) != null) {
+                new PartyData().getPartyFromMember(target).kickFromParty(target);
+            }
             invites.remove(target);
             members.add(target);
             return true;

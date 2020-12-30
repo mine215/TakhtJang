@@ -15,9 +15,6 @@ settings:
   debug: false
   save-user-cache-on-stop-only: false
   bungeecord: false
-  timeout-time: 60
-  restart-on-crash: true
-  restart-script: ./start.sh
   late-bind: false
   sample-count: 12
   player-shuffle: 0
@@ -26,6 +23,9 @@ settings:
   int-cache-limit: 1024
   moved-wrongly-threshold: 0.0625
   moved-too-quickly-threshold: 100.0
+  timeout-time: 60
+  restart-on-crash: true
+  restart-script: ./start.sh
   netty-threads: 4
   attribute:
     maxHealth:
@@ -58,14 +58,7 @@ stats:
 world-settings:
   default:
     verbose: true
-    wither-spawn-sound-radius: 0
-    view-distance: 10
-    zombie-aggressive-towards-villager: true
-    chunks-per-tick: 650
-    clear-tick-list: false
-    merge-radius:
-      exp: 3.0
-      item: 2.5
+    mob-spawn-range: 4
     anti-xray:
       enabled: true
       engine-mode: 1
@@ -86,7 +79,6 @@ world-settings:
       replace-blocks:
       - 1
       - 5
-    mob-spawn-range: 4
     nerf-spawner-mobs: false
     growth:
       cactus-modifier: 100
@@ -127,7 +119,15 @@ world-settings:
     max-tick-time:
       tile: 50
       entity: 50
-    item-despawn-rate: 6000
     arrow-despawn-rate: 1200
-    enable-zombie-pigmen-portal-spawns: true
+    zombie-aggressive-towards-villager: true
+    item-despawn-rate: 6000
+    merge-radius:
+      item: 2.5
+      exp: 3.0
     hanging-tick-frequency: 100
+    enable-zombie-pigmen-portal-spawns: true
+    wither-spawn-sound-radius: 0
+    view-distance: 10
+    chunks-per-tick: 650
+    clear-tick-list: false

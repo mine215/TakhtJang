@@ -68,25 +68,4 @@ public class PlayerMoveEvent implements Listener {
             playersOnPortals.remove(player);
         }
     }
-/*
-    @EventHandler
-    public void scaffold(org.bukkit.event.player.PlayerMoveEvent event) {
-        Player player = event.getPlayer();
-        if (new GameData().getPlayer(player).hasScaffold && !player.isSneaking()) {
-            Location locationUnder = player.getLocation();
-            locationUnder.setY(player.getLocation().getY() - 1);
-            Block blockUnderPlayer = player.getWorld().getBlockAt(locationUnder);
-            if (blockUnderPlayer.getType() == Material.AIR) {
-                blockUnderPlayer.setType(Material.WOOL);
-                new GameData().getPlayer(player).registerBlock(blockUnderPlayer);
-            }
-        } else if (new GameData().getPlayer(player).hasScaffold && player.isSneaking()) {
-            Location locationUnder = player.getLocation();
-            locationUnder.setY(player.getLocation().getY() - 1);
-            Block blockUnderPlayer = player.getWorld().getBlockAt(locationUnder);
-            if (new GameData().isPlayerBlock(blockUnderPlayer)) {
-                blockUnderPlayer.setType(Material.AIR);
-            }
-        }
-    }*/
 }

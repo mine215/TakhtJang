@@ -19,7 +19,6 @@ public class PlayerInfo {
     public boolean isEliminated = false;
     public boolean ironKit = false;
     public List<Block> blocksPlaced = new ArrayList<>();
-    public boolean hasScaffold = false;
 
     public PlayerInfo(Player playerIn, Team teamIn) {
         player = playerIn;

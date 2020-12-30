@@ -17,7 +17,7 @@ public class PlayerMethods {
         player.teleport(new Location(player.getWorld(), 175.5, 5.0, 175.5));
         GameData gameData = new GameData();
         try {
-            gameData.getPlayer(player).team = null;
+            gameData.getTeam(gameData.getPlayer(player).team).removePlayer(player);
         } catch (NullPointerException e) {
             gameData.addPlayer(player, null);
         }

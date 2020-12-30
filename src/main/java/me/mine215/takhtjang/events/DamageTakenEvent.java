@@ -42,7 +42,7 @@ public class DamageTakenEvent implements Listener {
     }
 
     @EventHandler
-    public void onEntityDamageFromEntity(EntityDamageByEntityEvent event) {
+    public void antiDeath(EntityDamageByEntityEvent event) {
         if (event.getEntity() instanceof Player) {
             if (event.getDamager() instanceof Player) {
                 Player player = (Player) event.getEntity();
@@ -58,6 +58,18 @@ public class DamageTakenEvent implements Listener {
                     }
                     event.setCancelled(true);
                     new GameData().getPlayer(player).kill();
+                }
+            }
+        }
+    }
+
+    @EventHandler
+    public void antiPVPInHub(EntityDamageByEntityEvent event) {
+        if (event.getEntity() instanceof Player) {
+            if (event.getDamager() instanceof Player) {
+                Player damager = (Player) event.getDamager();
+                if (new GameData().getPlayer(damager) == null) {
+                    event.setCancelled(true);
                 }
             }
         }

@@ -85,6 +85,16 @@ public class GameData {
         return Team.BLUE;
     }
 
+    public List<Team> getOpenTeams() {
+        List<Team> openTeams = new ArrayList<>();
+        for (TeamInfo teamInfo : teams) {
+            if (teamInfo.players.size() == 0) {
+                openTeams.add(teamInfo.team);
+            }
+        }
+        return openTeams;
+    }
+
     public void resetGame(Player player) {
         for (TeamInfo teamInfo : teams) {
             for (PlayerInfo playerInfo : teamInfo.players) {

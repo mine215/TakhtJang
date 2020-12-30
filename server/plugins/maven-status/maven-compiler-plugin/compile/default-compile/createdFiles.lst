@@ -17,7 +17,6 @@ me/mine215/takhtjang/commands/PartyCommand.class
 me/mine215/takhtjang/commands/JoinCommand.class
 me/mine215/takhtjang/commands/PlayCommand.class
 me/mine215/takhtjang/types/Team.class
-me/mine215/takhtjang/commands/ScaffoldCommand.class
 me/mine215/takhtjang/commands/ResetCommand.class
 me/mine215/takhtjang/methods/PlayerMethods.class
 me/mine215/takhtjang/events/PlayerSleepEvent.class
