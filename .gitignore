@@ -116,3 +116,4 @@ buildNumber.properties
 run/
 serverBackup/
 server/
+/src/test/

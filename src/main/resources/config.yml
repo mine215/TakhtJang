@@ -1,7 +1,7 @@
 name: "e"
 isSetup: "no"
 worldData:
-  worldName: "egg"
+  worldName: "TakhtJangSampleA"
   bases:
     red:
       x: -12.5
