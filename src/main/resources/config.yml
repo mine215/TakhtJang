@@ -1,0 +1,68 @@
+name: "e"
+isSetup: "no"
+worldData:
+  worldName: "egg"
+  bases:
+    red:
+      x: -12.5
+      y: 4.0
+      z: 0.5
+    blue:
+      x: 0.5
+      y: 4.0
+      z: 13.5
+    green:
+      x: 0.5
+      y: 4.0
+      z: -12.5
+    yellow:
+      x: 13.5
+      y: 4.0
+      z: 0.5
+  hub:
+    x: 175.5
+    y: 5
+    z: 175.5
+  shops:
+    validRadius: 8.0
+    shopA:
+      x: 0.5
+      y: 4.0
+      z: -12.5
+    shopB:
+      x: 0.5
+      y: 4.0
+      z: 13.5
+    shopC:
+      x: -12.5
+      y: 4.0
+      z: 0.5
+    shopD:
+      x: 13.5
+      y: 4.0
+      z: 0.5
+  pads:
+    padA:
+      x: -10.5
+      y: 6.0
+      z: -9.5
+    padB:
+      x: -25.5
+      y: 6.0
+      z: 16.5
+    padC:
+      x: 14.5
+      y: 13.0
+      z: 15.5
+    padD:
+      x: 9.5
+      y: 6.0
+      z: 13.5
+    padE:
+      x: 26.5
+      y: 1.0
+      z: 0.5
+    padF:
+      x: 0.5
+      y: 13.0
+      z: 0.5

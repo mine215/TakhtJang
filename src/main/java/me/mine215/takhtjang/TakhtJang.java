@@ -15,8 +15,6 @@ import java.sql.Time;
 
 public final class TakhtJang extends JavaPlugin {
 
-    FileConfiguration config = this.getConfig();
-
     public static TakhtJang instance;
 
     public void onLoad(){
@@ -27,15 +25,22 @@ public final class TakhtJang extends JavaPlugin {
 
     @Override
     public void onEnable() {
+
+        FileConfiguration config = this.getConfig();
+
+        if (config.getString("isSetup").equals("no")) {
+            this.saveDefaultConfig();
+        }
+
         getCommand("kit").setExecutor(new KitCommand());
-        getCommand("hub").setExecutor(new HubCommand());
+        getCommand("hub").setExecutor(new HubCommand(config, this));
         getCommand("shop").setExecutor(new ShopCommand());
         getCommand("join").setExecutor(new JoinCommand());
         getCommand("reset").setExecutor(new ResetCommand());
         getCommand("togglegen").setExecutor(new ToggleResCommand());
         getCommand("play").setExecutor(new PlayCommand());
-        getCommand("party").setExecutor(new PartyCommand());
-        getCommand("p").setExecutor(new PartyCommand());
+        getCommand("party").setExecutor(new PartyCommand(config, this));
+        getCommand("p").setExecutor(new PartyCommand(config, this));
 
         getServer().getPluginManager().registerEvents(new PlayerMoveEvent(config, this), this);
         getServer().getPluginManager().registerEvents(new InventoryClickEvent(config, this), this);
@@ -49,18 +54,20 @@ public final class TakhtJang extends JavaPlugin {
 
         schedule(() -> {
             if (shouldSpawnRes) {
-                Bukkit.getServer().getWorld("egg").dropItem(new Location(Bukkit.getServer().getWorld("egg"), 0.5, 4, -12.5), new ItemStack(Material.IRON_INGOT));
-                Bukkit.getServer().getWorld("egg").dropItem(new Location(Bukkit.getServer().getWorld("egg"), 0.5, 4, 13.5), new ItemStack(Material.IRON_INGOT));
-                Bukkit.getServer().getWorld("egg").dropItem(new Location(Bukkit.getServer().getWorld("egg"), -12.5, 4, 0.5), new ItemStack(Material.IRON_INGOT));
-                Bukkit.getServer().getWorld("egg").dropItem(new Location(Bukkit.getServer().getWorld("egg"), 13.5, 4, 0.5), new ItemStack(Material.IRON_INGOT));
+                String worldName = config.getString("worldData.worldName");
+                Bukkit.getServer().getWorld(worldName).dropItem(new Location(Bukkit.getServer().getWorld(worldName), 0.5, 4, -12.5), new ItemStack(Material.IRON_INGOT));
+                Bukkit.getServer().getWorld(worldName).dropItem(new Location(Bukkit.getServer().getWorld(worldName), 0.5, 4, 13.5), new ItemStack(Material.IRON_INGOT));
+                Bukkit.getServer().getWorld(worldName).dropItem(new Location(Bukkit.getServer().getWorld(worldName), -12.5, 4, 0.5), new ItemStack(Material.IRON_INGOT));
+                Bukkit.getServer().getWorld(worldName).dropItem(new Location(Bukkit.getServer().getWorld(worldName), 13.5, 4, 0.5), new ItemStack(Material.IRON_INGOT));
             }
             }, 80);
         schedule(() -> {
             if (shouldSpawnRes) {
-                Bukkit.getServer().getWorld("egg").dropItem(new Location(Bukkit.getServer().getWorld("egg"), 0.5, 4, -12.5), new ItemStack(Material.GOLD_INGOT));
-                Bukkit.getServer().getWorld("egg").dropItem(new Location(Bukkit.getServer().getWorld("egg"), 0.5, 4, 13.5), new ItemStack(Material.GOLD_INGOT));
-                Bukkit.getServer().getWorld("egg").dropItem(new Location(Bukkit.getServer().getWorld("egg"), -12.5, 4, 0.5), new ItemStack(Material.GOLD_INGOT));
-                Bukkit.getServer().getWorld("egg").dropItem(new Location(Bukkit.getServer().getWorld("egg"), 13.5, 4, 0.5), new ItemStack(Material.GOLD_INGOT));
+                String worldName = config.getString("worldData.worldName");
+                Bukkit.getServer().getWorld(worldName).dropItem(new Location(Bukkit.getServer().getWorld(worldName), 0.5, 4, -12.5), new ItemStack(Material.GOLD_INGOT));
+                Bukkit.getServer().getWorld(worldName).dropItem(new Location(Bukkit.getServer().getWorld(worldName), 0.5, 4, 13.5), new ItemStack(Material.GOLD_INGOT));
+                Bukkit.getServer().getWorld(worldName).dropItem(new Location(Bukkit.getServer().getWorld(worldName), -12.5, 4, 0.5), new ItemStack(Material.GOLD_INGOT));
+                Bukkit.getServer().getWorld(worldName).dropItem(new Location(Bukkit.getServer().getWorld(worldName), 13.5, 4, 0.5), new ItemStack(Material.GOLD_INGOT));
             }
             }, 200);
     }

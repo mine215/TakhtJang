@@ -35,7 +35,7 @@ public class DamageTakenEvent implements Listener {
                 if (new GameData().getPlayer(player) != null) {
                     new GameData().getPlayer(player).kill();
                 } else {
-                    new PlayerMethods().hub(player);
+                    new PlayerMethods().hub(player, config);
                 }
             }
         }

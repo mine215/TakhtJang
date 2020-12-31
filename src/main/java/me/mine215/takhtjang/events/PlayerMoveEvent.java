@@ -33,7 +33,11 @@ public class PlayerMoveEvent implements Listener {
         Player player = event.getPlayer();
 
         if (player.getLocation().getBlockY() <= 0 && !player.getGameMode().equals(GameMode.SPECTATOR) && !player.getGameMode().equals(GameMode.CREATIVE)) {
-            new GameData().getPlayer(player).kill();
+            if(new GameData().getPlayer(player) != null) {
+                new GameData().getPlayer(player).kill();
+            } else {
+                new PlayerMethods().hub(player, config);
+            }
         }
     }
 
@@ -50,12 +54,44 @@ public class PlayerMoveEvent implements Listener {
         // Active teleport pads
         if (!playersOnPortals.contains(player)) {
             List<Location> padLocations = new ArrayList<>();
-            padLocations.add(new Location(player.getWorld(), -10.5, 6, -9.5));
+
+            double padAX = TakhtJang.getInstance().getConfig().getDouble("worldData.pads.padA.x");
+            double padAY = TakhtJang.getInstance().getConfig().getDouble("worldData.pads.padA.y");
+            double padAZ = TakhtJang.getInstance().getConfig().getDouble("worldData.pads.padA.z");
+
+            double padBX = TakhtJang.getInstance().getConfig().getDouble("worldData.pads.padB.x");
+            double padBY = TakhtJang.getInstance().getConfig().getDouble("worldData.pads.padB.y");
+            double padBZ = TakhtJang.getInstance().getConfig().getDouble("worldData.pads.padB.z");
+
+            double padCX = TakhtJang.getInstance().getConfig().getDouble("worldData.pads.padC.x");
+            double padCY = TakhtJang.getInstance().getConfig().getDouble("worldData.pads.padC.y");
+            double padCZ = TakhtJang.getInstance().getConfig().getDouble("worldData.pads.padC.z");
+
+            double padDX = TakhtJang.getInstance().getConfig().getDouble("worldData.pads.padD.x");
+            double padDY = TakhtJang.getInstance().getConfig().getDouble("worldData.pads.padD.y");
+            double padDZ = TakhtJang.getInstance().getConfig().getDouble("worldData.pads.padD.z");
+
+            double padEX = TakhtJang.getInstance().getConfig().getDouble("worldData.pads.padE.x");
+            double padEY = TakhtJang.getInstance().getConfig().getDouble("worldData.pads.padE.Y");
+            double padEZ = TakhtJang.getInstance().getConfig().getDouble("worldData.pads.padE.Z");
+
+            double padFX = TakhtJang.getInstance().getConfig().getDouble("worldData.pads.padF.x");
+            double padFY = TakhtJang.getInstance().getConfig().getDouble("worldData.pads.padF.y");
+            double padFZ = TakhtJang.getInstance().getConfig().getDouble("worldData.pads.padF.z");
+
+            /*padLocations.add(new Location(player.getWorld(), -10.5, 6, -9.5));
             padLocations.add(new Location(player.getWorld(), -25.5, 6, 16.5));
             padLocations.add(new Location(player.getWorld(), 14.5, 13, 15.5));
             padLocations.add(new Location(player.getWorld(), 9.5, 6, 13.5));
             padLocations.add(new Location(player.getWorld(), 26.5, 1, 0.5));
-            padLocations.add(new Location(player.getWorld(), 0.5, 13, 0.5));
+            padLocations.add(new Location(player.getWorld(), 0.5, 13, 0.5));*/
+
+            padLocations.add(new Location(player.getWorld(), padAX, padAY, padAZ));
+            padLocations.add(new Location(player.getWorld(), padBX, padBY, padBZ));
+            padLocations.add(new Location(player.getWorld(), padCX, padCY, padCZ));
+            padLocations.add(new Location(player.getWorld(), padDX, padDY, padDZ));
+            padLocations.add(new Location(player.getWorld(), padEX, padEY, padEZ));
+            padLocations.add(new Location(player.getWorld(), padFX, padFY, padFZ));
 
             Random rand = new Random();
             int padToTeleportToIndex = rand.nextInt(padLocations.size());
