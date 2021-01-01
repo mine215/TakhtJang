@@ -65,7 +65,9 @@ public class PlayerInfo {
         if (ironKit) {
             new PlayerMethods().ironKit(player);
         }
-        player.setHealth(player.getMaxHealth());
+        TakhtJang.scheduleSyncDelayedTask(() -> {
+            player.setHealth(player.getMaxHealth());
+        }, 10);
     }
 
     public void kill() {

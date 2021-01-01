@@ -3,6 +3,7 @@ package me.mine215.takhtjang;
 import jdk.jfr.internal.tool.Main;
 import me.mine215.takhtjang.commands.*;
 import me.mine215.takhtjang.events.*;
+import me.mine215.takhtjang.types.Team;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -12,6 +13,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.sql.Time;
+import java.util.ArrayList;
+import java.util.List;
 
 public final class TakhtJang extends JavaPlugin {
 
@@ -28,7 +31,7 @@ public final class TakhtJang extends JavaPlugin {
 
         FileConfiguration config = this.getConfig();
 
-        if (config.getString("isSetup").equals("no")) {
+        if (!config.getBoolean("isSetup")) {
             this.saveDefaultConfig();
         }
 
@@ -52,24 +55,44 @@ public final class TakhtJang extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlayerSleepEvent(config, this), this);
         getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "[TakhtJang]: Plugin is enabled!");
 
+        double genMult = config.getDouble("genMultiplier");
+
         schedule(() -> {
             if (shouldSpawnRes) {
-                String worldName = config.getString("worldData.worldName");
-                Bukkit.getServer().getWorld(worldName).dropItem(new Location(Bukkit.getServer().getWorld(worldName), 0.5, 4, -12.5), new ItemStack(Material.IRON_INGOT));
-                Bukkit.getServer().getWorld(worldName).dropItem(new Location(Bukkit.getServer().getWorld(worldName), 0.5, 4, 13.5), new ItemStack(Material.IRON_INGOT));
-                Bukkit.getServer().getWorld(worldName).dropItem(new Location(Bukkit.getServer().getWorld(worldName), -12.5, 4, 0.5), new ItemStack(Material.IRON_INGOT));
-                Bukkit.getServer().getWorld(worldName).dropItem(new Location(Bukkit.getServer().getWorld(worldName), 13.5, 4, 0.5), new ItemStack(Material.IRON_INGOT));
+                Location spawnLoc;
+                List<Team> teamList = new ArrayList();
+                teamList.add(Team.RED);
+                teamList.add(Team.BLUE);
+                teamList.add(Team.GREEN);
+                teamList.add(Team.YELLOW);
+                for (Team team : teamList) {
+                    double x = TakhtJang.getInstance().getConfig().getDouble("worldData.bases." + team.toString().toLowerCase() + ".x");
+                    double y = TakhtJang.getInstance().getConfig().getDouble("worldData.bases." + team.toString().toLowerCase() + ".y");
+                    double z = TakhtJang.getInstance().getConfig().getDouble("worldData.bases." + team.toString().toLowerCase() + ".z");
+                    String worldName = config.getString("worldData.worldName");
+                    spawnLoc = new Location(Bukkit.getServer().getWorld(worldName), x, y, z);
+                    Bukkit.getServer().getWorld(worldName).dropItem(new Location(Bukkit.getServer().getWorld(worldName), x, y, z), new ItemStack(Material.IRON_INGOT));
+                }
             }
-            }, 80);
+            }, (int) (80 / genMult));
         schedule(() -> {
             if (shouldSpawnRes) {
-                String worldName = config.getString("worldData.worldName");
-                Bukkit.getServer().getWorld(worldName).dropItem(new Location(Bukkit.getServer().getWorld(worldName), 0.5, 4, -12.5), new ItemStack(Material.GOLD_INGOT));
-                Bukkit.getServer().getWorld(worldName).dropItem(new Location(Bukkit.getServer().getWorld(worldName), 0.5, 4, 13.5), new ItemStack(Material.GOLD_INGOT));
-                Bukkit.getServer().getWorld(worldName).dropItem(new Location(Bukkit.getServer().getWorld(worldName), -12.5, 4, 0.5), new ItemStack(Material.GOLD_INGOT));
-                Bukkit.getServer().getWorld(worldName).dropItem(new Location(Bukkit.getServer().getWorld(worldName), 13.5, 4, 0.5), new ItemStack(Material.GOLD_INGOT));
+                Location spawnLoc;
+                List<Team> teamList = new ArrayList();
+                teamList.add(Team.RED);
+                teamList.add(Team.BLUE);
+                teamList.add(Team.GREEN);
+                teamList.add(Team.YELLOW);
+                for (Team team : teamList) {
+                    double x = TakhtJang.getInstance().getConfig().getDouble("worldData.bases." + team.toString().toLowerCase() + ".x");
+                    double y = TakhtJang.getInstance().getConfig().getDouble("worldData.bases." + team.toString().toLowerCase() + ".y");
+                    double z = TakhtJang.getInstance().getConfig().getDouble("worldData.bases." + team.toString().toLowerCase() + ".z");
+                    String worldName = config.getString("worldData.worldName");
+                    spawnLoc = new Location(Bukkit.getServer().getWorld(worldName), x, y, z);
+                    Bukkit.getServer().getWorld(worldName).dropItem(new Location(Bukkit.getServer().getWorld(worldName), x, y, z), new ItemStack(Material.GOLD_INGOT));
+                }
             }
-            }, 200);
+            }, (int) (200 / genMult));
     }
 
     @Override

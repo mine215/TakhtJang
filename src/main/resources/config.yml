@@ -1,7 +1,8 @@
-name: "e"
 isSetup: "no"
+doPortals: true
+genMultiplier: 1.0
 worldData:
-  worldName: "TakhtJangSampleA"
+  worldName: "Obbylisk"
   bases:
     red:
       x: -12.5

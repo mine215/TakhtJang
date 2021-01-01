@@ -1,4 +1,4 @@
-isSetup: "no"
+isSetup: true
 doPortals: false
 genMultiplier: 2.0
 worldData:
