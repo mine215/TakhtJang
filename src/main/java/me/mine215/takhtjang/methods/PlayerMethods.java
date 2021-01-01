@@ -3,6 +3,7 @@ package me.mine215.takhtjang.methods;
 import me.mine215.takhtjang.data.GameData;
 import me.mine215.takhtjang.types.Team;
 import org.bukkit.*;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -11,10 +12,14 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 
 public class PlayerMethods {
-    public void hub(Player player) {
+    public void hub(Player player, FileConfiguration config) {
         player.setGameMode(GameMode.SURVIVAL);
         kit(player, null);
-        player.teleport(new Location(player.getWorld(), 175.5, 5.0, 175.5));
+        double x = config.getDouble("worldData.hub.x");
+        double y = config.getDouble("worldData.hub.y");
+        double z = config.getDouble("worldData.hub.z");
+        player.teleport(new Location(player.getWorld(), x, y, z));
+        //player.teleport(new Location(player.getWorld(), 175.5, 5.0, 175.5));
         GameData gameData = new GameData();
         try {
             gameData.getTeam(gameData.getPlayer(player).team).removePlayer(player);

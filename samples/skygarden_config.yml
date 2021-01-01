@@ -1,0 +1,44 @@
+isSetup: true
+doPortals: false
+genMultiplier: 2.0
+worldData:
+  worldName: "Skygarden"
+  bases:
+    red:
+      x: -36.5
+      y: 14.0
+      z: 0.5
+    blue:
+      x: 0.5
+      y: 14.0
+      z: 37.5
+    green:
+      x: 0.5
+      y: 14.0
+      z: -36.5
+    yellow:
+      x: 37.5
+      y: 14.0
+      z: 0.5
+  hub:
+    x: 175.5
+    y: 5.0
+    z: 175.5
+  shops:
+    validRadius: 8.0
+    shopA:
+      x: -36.5
+      y: 14.0
+      z: 0.5
+    shopB:
+      x: 0.5
+      y: 14.0
+      z: 37.5
+    shopC:
+      x: 0.5
+      y: 14.0
+      z: -36.5
+    shopD:
+      x: 37.5
+      y: 14.0
+      z: 0.5

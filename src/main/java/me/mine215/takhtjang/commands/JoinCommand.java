@@ -24,6 +24,7 @@ public class JoinCommand implements CommandExecutor {
             String kitName = args[0].toLowerCase();
 
             GameData gameData = new GameData();
+            gameData.initTeams();
 
             if (!gameData.getPlayer(player).isEliminated) {
 

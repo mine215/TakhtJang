@@ -4,6 +4,7 @@ import me.mine215.takhtjang.TakhtJang;
 import me.mine215.takhtjang.types.Team;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;

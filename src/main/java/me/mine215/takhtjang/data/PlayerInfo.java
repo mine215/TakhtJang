@@ -7,6 +7,7 @@ import me.rayzr522.jsonmessage.JSONMessage;
 import org.apache.commons.lang.ObjectUtils;
 import org.bukkit.*;
 import org.bukkit.block.Block;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -55,29 +56,18 @@ public class PlayerInfo {
     public void sendSpawn() {
         player.setGameMode(GameMode.SURVIVAL);
         Location spawnLoc;
-        switch (team.toString()) {
-            case "BLUE":
-                spawnLoc = new Location(player.getWorld(), 0.5, 4.0, 13.5);
-                break;
-            case "RED":
-                spawnLoc = new Location(player.getWorld(), -12.5, 4.0, 0.5);
-                break;
-            case "GREEN":
-                spawnLoc = new Location(player.getWorld(), 0.5, 4.0, -12.5);
-                break;
-            case "YELLOW":
-                spawnLoc = new Location(player.getWorld(), 13.5, 4.0, 0.5);
-                break;
-            default:
-                spawnLoc = new Location(player.getWorld(), 0, 4.0, 0);
-                break;
-        }
+        double x = TakhtJang.getInstance().getConfig().getDouble("worldData.bases." + team.toString().toLowerCase() + ".x");
+        double y = TakhtJang.getInstance().getConfig().getDouble("worldData.bases." + team.toString().toLowerCase() + ".y");
+        double z = TakhtJang.getInstance().getConfig().getDouble("worldData.bases." + team.toString().toLowerCase() + ".z");
+        spawnLoc = new Location(player.getWorld(), x, y, z);
         player.teleport(spawnLoc);
         new PlayerMethods().kit(player, team);
         if (ironKit) {
             new PlayerMethods().ironKit(player);
         }
-        player.setHealth(player.getMaxHealth());
+        TakhtJang.scheduleSyncDelayedTask(() -> {
+            player.setHealth(player.getMaxHealth());
+        }, 10);
     }
 
     public void kill() {
@@ -139,7 +129,7 @@ public class PlayerInfo {
                 }
             }
         } else {
-            new PlayerMethods().hub(player);
+            new PlayerMethods().hub(player, TakhtJang.getInstance().getConfig());
         }
     }
 }

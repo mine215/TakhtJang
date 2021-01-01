@@ -1,5 +1,6 @@
 package me.mine215.takhtjang.commands;
 
+import me.mine215.takhtjang.TakhtJang;
 import me.mine215.takhtjang.data.GameData;
 import me.mine215.takhtjang.data.Party;
 import me.mine215.takhtjang.data.PartyData;
@@ -10,9 +11,18 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 public class PartyCommand implements CommandExecutor {
+
+    static TakhtJang main;
+    FileConfiguration config;
+
+    public PartyCommand(FileConfiguration config, TakhtJang main) {
+        this.main = main;
+        this.config = config;
+    }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
@@ -51,7 +61,7 @@ public class PartyCommand implements CommandExecutor {
                         for (Player playerInParty : partyData.getPartyFromOwner(player).getMembers()) {
                             if (new GameData().getPlayer(player) == null) {
                                 if (!playerInParty.equals(player)) {
-                                    new PlayerMethods().hub(playerInParty);
+                                    new PlayerMethods().hub(playerInParty, config);
                                 }
                             } else {
                                 player.sendMessage(ChatColor.RED + "You cannot warp party members into a game, please do /play to start a game.");
