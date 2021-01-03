@@ -1,0 +1,33 @@
+name: TakhtJang
+version: 1.0.0
+author: mine215
+main: me.mine215.takhtjang.TakhtJang
+
+commands:
+  kit:
+    description: Gives a kit
+    usage: /<command> <kit>
+  hub:
+    description: Goes hub
+    usage: /<command>
+  shop:
+    description: Opens the shop
+    usage: /<command>
+  reset:
+    description: Resets the map
+    usage: /<command>
+  togglegen:
+    description: Toggles resource generation
+    usage: /<command>
+  join:
+    description: Joins game
+    usage: /<command> <team color>
+  play:
+    description: Joins a game
+    usage: /<command>
+  p:
+    description: Party command
+    usage: /<command> <name>
+  party:
+    description: Party command
+    usage: /<command> <name>
