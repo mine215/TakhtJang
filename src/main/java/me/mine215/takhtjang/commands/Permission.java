@@ -2,7 +2,6 @@ package me.mine215.takhtjang.commands;
 
 import me.mine215.takhtjang.TakhtJang;
 import me.mine215.takhtjang.methods.MDBMethods;
-import me.mine215.takhtjang.methods.RankMethods;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -15,10 +14,10 @@ import org.bukkit.permissions.PermissionAttachment;
 public class Permission implements CommandExecutor {
 
     static TakhtJang main;
-    FileConfiguration config;
+    final FileConfiguration config;
 
     public Permission(FileConfiguration config, TakhtJang main) {
-        this.main = main;
+        Permission.main = main;
         this.config = config;
     }
 

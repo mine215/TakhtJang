@@ -4,10 +4,8 @@ import me.mine215.takhtjang.TakhtJang;
 import me.mine215.takhtjang.data.GameData;
 import me.mine215.takhtjang.methods.PlayerMethods;
 import me.mine215.takhtjang.types.Team;
-import me.rayzr522.jsonmessage.JSONMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -15,25 +13,21 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.SkullMeta;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class InventoryClick implements Listener {
 
     static TakhtJang main;
-    FileConfiguration config;
+    final FileConfiguration config;
 
     public InventoryClick(FileConfiguration config, TakhtJang main) {
-        this.main = main;
+        InventoryClick.main = main;
         this.config = config;
     }
 
     @EventHandler()
     public void shopClick(org.bukkit.event.inventory.InventoryClickEvent event) {
         Player player = Bukkit.getPlayer(event.getWhoClicked().getName());
-        Integer slotClicked = event.getSlot();
+        int slotClicked = event.getSlot();
         Inventory invClicked = event.getInventory();
         ItemStack itemClicked = invClicked.getItem(slotClicked);
         if (itemClicked != null && invClicked.getName().equals(ChatColor.BLACK + "Shop")) {
@@ -150,7 +144,7 @@ public class InventoryClick implements Listener {
     @EventHandler()
     public void statsClick(org.bukkit.event.inventory.InventoryClickEvent event) {
         Player player = Bukkit.getPlayer(event.getWhoClicked().getName());
-        Integer slotClicked = event.getSlot();
+        int slotClicked = event.getSlot();
         Inventory invClicked = event.getInventory();
         ItemStack itemClicked = invClicked.getItem(slotClicked);
         if (itemClicked != null && invClicked.getName().equals(ChatColor.BLACK + "Your Menu"))

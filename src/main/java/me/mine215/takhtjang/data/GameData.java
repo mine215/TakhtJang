@@ -4,7 +4,6 @@ import me.mine215.takhtjang.TakhtJang;
 import me.mine215.takhtjang.types.Team;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
@@ -65,9 +64,7 @@ public class GameData {
         List<Block> playerBlocks = new ArrayList<>();
         for (TeamInfo teamInfo : teams) {
             for (PlayerInfo playerInfo : teamInfo.players) {
-                for (Block blockInfo : playerInfo.blocksPlaced) {
-                    playerBlocks.add(blockInfo);
-                }
+                playerBlocks.addAll(playerInfo.blocksPlaced);
             }
         }
         return playerBlocks;

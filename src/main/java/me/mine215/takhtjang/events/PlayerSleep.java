@@ -11,10 +11,10 @@ import org.bukkit.event.player.PlayerBedEnterEvent;
 public class PlayerSleep implements Listener {
 
     static TakhtJang main;
-    FileConfiguration config;
+    final FileConfiguration config;
 
     public PlayerSleep(FileConfiguration config, TakhtJang main) {
-        this.main = main;
+        PlayerSleep.main = main;
         this.config = config;
     }
 

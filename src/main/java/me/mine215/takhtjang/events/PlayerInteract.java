@@ -21,7 +21,7 @@ import java.util.List;
 public class PlayerInteract implements Listener {
 
     static TakhtJang main;
-    FileConfiguration config;
+    final FileConfiguration config;
 
     public static List<Player> playersOnPortals = new ArrayList<>();
 

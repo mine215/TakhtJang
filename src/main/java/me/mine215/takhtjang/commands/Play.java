@@ -4,7 +4,6 @@ import me.mine215.takhtjang.data.GameData;
 import me.mine215.takhtjang.data.Party;
 import me.mine215.takhtjang.data.PartyData;
 import me.mine215.takhtjang.data.PlayerInfo;
-import me.mine215.takhtjang.methods.PlayerMethods;
 import me.mine215.takhtjang.types.Team;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;

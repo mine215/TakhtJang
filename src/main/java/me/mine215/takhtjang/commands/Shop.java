@@ -9,8 +9,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.List;
-
 public class Shop implements CommandExecutor {
 
     @Override
@@ -41,7 +39,7 @@ public class Shop implements CommandExecutor {
             new PlayerMethods().shop(player);
         } else {
             double validShopRadius = TakhtJang.instance.getConfig().getDouble("worldData.shops.validRadius");
-            player.sendMessage(ChatColor.RED + "Please get within " + Double.toString(validShopRadius) + " blocks of a generator.");
+            player.sendMessage(ChatColor.RED + "Please get within " + (int) validShopRadius + " blocks of a generator.");
         }
 
         return true;

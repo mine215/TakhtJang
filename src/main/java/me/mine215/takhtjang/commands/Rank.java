@@ -1,13 +1,7 @@
 package me.mine215.takhtjang.commands;
 
 import me.mine215.takhtjang.TakhtJang;
-import me.mine215.takhtjang.data.GameData;
-import me.mine215.takhtjang.data.Party;
-import me.mine215.takhtjang.data.PartyData;
-import me.mine215.takhtjang.methods.MDBMethods;
-import me.mine215.takhtjang.methods.PlayerMethods;
 import me.mine215.takhtjang.methods.RankMethods;
-import me.rayzr522.jsonmessage.JSONMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -16,15 +10,13 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
-import java.util.Locale;
-
 public class Rank implements CommandExecutor {
 
     static TakhtJang main;
-    FileConfiguration config;
+    final FileConfiguration config;
 
     public Rank(FileConfiguration config, TakhtJang main) {
-        this.main = main;
+        Rank.main = main;
         this.config = config;
     }
 

@@ -3,8 +3,8 @@ package me.mine215.takhtjang.data;
 import java.util.UUID;
 
 public class PlayerStats {
-    public String uuid;
-    public String name;
+    public final String uuid;
+    public final String name;
     public int finalKills;
     public int finalDeaths;
     public int wins;

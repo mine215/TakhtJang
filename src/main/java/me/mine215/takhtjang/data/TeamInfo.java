@@ -4,7 +4,6 @@ import me.mine215.takhtjang.TakhtJang;
 import me.mine215.takhtjang.methods.MDBMethods;
 import me.mine215.takhtjang.types.Stats;
 import me.mine215.takhtjang.types.Team;
-import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.metadata.FixedMetadataValue;
@@ -13,8 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TeamInfo {
-    public List<PlayerInfo> players = new ArrayList<>();
-    public Team team;
+    public final List<PlayerInfo> players = new ArrayList<>();
+    public final Team team;
     public int rAnchors = 0;
     public Block rAnchor;
     public boolean wasRAnchorGiven = false;

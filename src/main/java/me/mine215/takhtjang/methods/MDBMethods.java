@@ -3,7 +3,6 @@ package me.mine215.takhtjang.methods;
 import com.mongodb.*;
 import me.mine215.takhtjang.data.PlayerStats;
 import me.mine215.takhtjang.types.Stats;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.net.UnknownHostException;
@@ -57,7 +56,7 @@ public class MDBMethods {
                 DBCursor cursor = col.find(query);
                 DBObject playerStatsFromMDB = cursor.one();
 
-                DBObject data = null;
+                DBObject data;
 
                 if (playerStatsFromMDB != null) {
 
@@ -121,15 +120,14 @@ public class MDBMethods {
                     DBCursor cursor = col.find(query);
                     DBObject playerStatsFromMDB = cursor.one();
 
-                    if (playerStatsFromMDB != null) {
-                        return true;
-                    }
+                    return playerStatsFromMDB != null;
                 }
             }
         }
         return false;
     }
 
+    @SuppressWarnings("unchecked")
     public List<String> getManagedPlayerPermission(Player player) {
         List<String> permissions = new ArrayList<>();
 
@@ -149,8 +147,6 @@ public class MDBMethods {
                 DBCursor cursor = col.find(query);
                 DBObject playerStatsFromMDB = cursor.one();
 
-                DBObject data = null;
-
                 if (playerStatsFromMDB != null) {
                     if (playerStatsFromMDB.get("permissions") != null) {
                         permissions = (List<String>) playerStatsFromMDB.get("permissions");
@@ -161,6 +157,7 @@ public class MDBMethods {
         return permissions;
     }
 
+    @SuppressWarnings("unchecked")
     public void addManagedPlayerPermission(Player player, String permission) {
         MongoClient mongoClient = null;
         try {
@@ -178,7 +175,7 @@ public class MDBMethods {
                 DBCursor cursor = col.find(query);
                 DBObject playerStatsFromMDB = cursor.one();
 
-                DBObject data = null;
+                DBObject data;
 
                 if (playerStatsFromMDB != null) {
 
@@ -211,6 +208,7 @@ public class MDBMethods {
         }
     }
 
+    @SuppressWarnings("unchecked")
     public void removeManagedPlayerPermission(Player player, String permission) {
         MongoClient mongoClient = null;
         try {
@@ -228,7 +226,7 @@ public class MDBMethods {
                 DBCursor cursor = col.find(query);
                 DBObject playerStatsFromMDB = cursor.one();
 
-                DBObject data = null;
+                DBObject data;
 
                 if (playerStatsFromMDB != null) {
 
@@ -405,7 +403,7 @@ public class MDBMethods {
                 DBCursor cursor = col.find(query);
                 DBObject playerStatsFromMDB = cursor.one();
 
-                DBObject data = null;
+                DBObject data;
 
                 if (playerStatsFromMDB != null) {
 
@@ -446,7 +444,7 @@ public class MDBMethods {
                 DBObject playerStatsFromMDB = cursor.one();
 
                 PlayerStats playerStats = new PlayerStats(player.getUniqueId(), player.getName());
-                DBObject data = null;
+                DBObject data;
 
                 int statBase;
                 if (playerStatsFromMDB != null) {
@@ -486,7 +484,7 @@ public class MDBMethods {
                 DBObject playerStatsFromMDB = cursor.one();
 
                 PlayerStats playerStats = new PlayerStats(player.getUniqueId(), player.getName());
-                DBObject data = null;
+                DBObject data;
 
                 int statBase;
                 if (playerStatsFromMDB != null) {
@@ -517,7 +515,7 @@ public class MDBMethods {
         }
     }
 
-    public boolean updateStatsDouble(Player player, Stats statType, double statToAdd) {
+    public void updateStatsDouble(Player player, Stats statType, double statToAdd) {
         MongoClient mongoClient = null;
         try {
             mongoClient = new MongoClient(new MongoClientURI("mongodb://localhost:27017"));
@@ -535,7 +533,7 @@ public class MDBMethods {
                 DBObject playerStatsFromMDB = cursor.one();
 
                 PlayerStats playerStats = new PlayerStats(player.getUniqueId(), player.getName());
-                DBObject data = null;
+                DBObject data;
 
                 double statBase;
                 if (playerStatsFromMDB != null) {
@@ -562,9 +560,7 @@ public class MDBMethods {
                             .append(statType.toString(), statBase + statToAdd);
                     col.insert(data);
                 }
-                return true;
             }
         }
-        return false;
     }
 }

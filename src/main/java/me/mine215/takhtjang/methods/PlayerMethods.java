@@ -16,7 +16,7 @@ public class PlayerMethods {
     public void hub(Player player, FileConfiguration config) {
         player.setGameMode(GameMode.SURVIVAL);
         kit(player, null);
-        ItemStack head = new ItemHead().createHead(1, player.getName());
+        ItemStack head = ItemHead.createHead(1, player.getName());
         ItemMeta headMeta = head.getItemMeta();
         headMeta.setDisplayName(ChatColor.GOLD + "Your Menu");
         head.setItemMeta(headMeta);

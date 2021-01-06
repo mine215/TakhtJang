@@ -47,7 +47,6 @@ public final class TakhtJang extends JavaPlugin {
 
         getServer().getPluginManager().registerEvents(new PlayerMove(config, this), this);
         getServer().getPluginManager().registerEvents(new InventoryClick(config, this), this);
-        getServer().getPluginManager().registerEvents(new PickupItem(config, this), this);
         getServer().getPluginManager().registerEvents(new WeatherModify(config, this), this);
         getServer().getPluginManager().registerEvents(new DamageTaken(config, this), this);
         getServer().getPluginManager().registerEvents(new PlaceBlock(config, this), this);
@@ -62,7 +61,7 @@ public final class TakhtJang extends JavaPlugin {
 
         schedule(() -> {
             if (shouldSpawnRes) {
-                List<Team> teamList = new ArrayList();
+                List<Team> teamList = new ArrayList<>();
                 teamList.add(Team.RED);
                 teamList.add(Team.BLUE);
                 teamList.add(Team.GREEN);
@@ -78,7 +77,7 @@ public final class TakhtJang extends JavaPlugin {
             }, (int) (80 / genMult));
         schedule(() -> {
             if (shouldSpawnRes) {
-                List<Team> teamList = new ArrayList();
+                List<Team> teamList = new ArrayList<>();
                 teamList.add(Team.RED);
                 teamList.add(Team.BLUE);
                 teamList.add(Team.GREEN);
@@ -99,8 +98,8 @@ public final class TakhtJang extends JavaPlugin {
         getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "[TakhtJang]: Plugin is disabled!");
     }
 
-    public static int scheduleSyncDelayedTask(Runnable runnable, int delay){
-        return Bukkit.getScheduler().scheduleSyncDelayedTask(instance, runnable, delay);
+    public static void scheduleSyncDelayedTask(Runnable runnable, int delay){
+        Bukkit.getScheduler().scheduleSyncDelayedTask(instance, runnable, delay);
     }
 
     public void schedule(Runnable runnable, int ticks) {

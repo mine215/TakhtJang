@@ -13,7 +13,7 @@ import org.bukkit.permissions.PermissionAttachment;
 public class PlayerJoin implements Listener {
 
     static TakhtJang main;
-    FileConfiguration config;
+    final FileConfiguration config;
 
     public PlayerJoin(FileConfiguration config, TakhtJang main) {
         PlayerJoin.main = main;

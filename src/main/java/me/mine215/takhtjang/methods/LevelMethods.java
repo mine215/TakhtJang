@@ -39,7 +39,6 @@ public class LevelMethods {
             levelString = ChatColor.DARK_RED + "" + ChatColor.BOLD + "Ω" + ChatColor.RESET + ChatColor.DARK_RED + level;
         }
 
-        String finalString = ChatColor.BLACK + "[" + levelString + ChatColor.BLACK + "]";
-        return finalString;
+        return ChatColor.BLACK + "[" + levelString + ChatColor.BLACK + "]";
     }
 }

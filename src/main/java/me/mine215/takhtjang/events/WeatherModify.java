@@ -6,15 +6,13 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.weather.WeatherChangeEvent;
 
-import java.util.List;
-
 public class WeatherModify implements Listener {
 
     static TakhtJang main;
-    FileConfiguration config;
+    final FileConfiguration config;
 
     public WeatherModify(FileConfiguration config, TakhtJang main) {
-        this.main = main;
+        WeatherModify.main = main;
         this.config = config;
     }
 

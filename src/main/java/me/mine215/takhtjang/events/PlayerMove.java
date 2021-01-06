@@ -17,9 +17,9 @@ import java.util.Random;
 public class PlayerMove implements Listener {
 
     static TakhtJang main;
-    FileConfiguration config;
+    final FileConfiguration config;
 
-    public static List<Player> playersOnPortals = new ArrayList<>();
+    public static final List<Player> playersOnPortals = new ArrayList<>();
 
     public PlayerMove(FileConfiguration config, TakhtJang main) {
         me.mine215.takhtjang.events.PlayerMove.main = main;
@@ -78,13 +78,6 @@ public class PlayerMove implements Listener {
                     double padFX = TakhtJang.getInstance().getConfig().getDouble("worldData.pads.padF.x");
                     double padFY = TakhtJang.getInstance().getConfig().getDouble("worldData.pads.padF.y");
                     double padFZ = TakhtJang.getInstance().getConfig().getDouble("worldData.pads.padF.z");
-
-                    /*padLocations.add(new Location(player.getWorld(), -10.5, 6, -9.5));
-                    padLocations.add(new Location(player.getWorld(), -25.5, 6, 16.5));
-                    padLocations.add(new Location(player.getWorld(), 14.5, 13, 15.5));
-                    padLocations.add(new Location(player.getWorld(), 9.5, 6, 13.5));
-                    padLocations.add(new Location(player.getWorld(), 26.5, 1, 0.5));
-                    padLocations.add(new Location(player.getWorld(), 0.5, 13, 0.5));*/
 
                     padLocations.add(new Location(player.getWorld(), padAX, padAY, padAZ));
                     padLocations.add(new Location(player.getWorld(), padBX, padBY, padBZ));

@@ -15,10 +15,10 @@ import org.bukkit.event.block.BlockPlaceEvent;
 public class PlaceBlock implements Listener {
 
     static TakhtJang main;
-    FileConfiguration config;
+    final FileConfiguration config;
 
     public PlaceBlock(FileConfiguration config, TakhtJang main) {
-        this.main = main;
+        PlaceBlock.main = main;
         this.config = config;
     }
 

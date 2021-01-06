@@ -3,26 +3,20 @@ package me.mine215.takhtjang.events;
 import me.mine215.takhtjang.TakhtJang;
 import me.mine215.takhtjang.data.GameData;
 import me.mine215.takhtjang.methods.PlayerMethods;
-import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.inventory.ItemStack;
-
-import java.util.Arrays;
-import java.util.List;
 
 public class DamageTaken implements Listener {
 
     static TakhtJang main;
-    FileConfiguration config;
+    final FileConfiguration config;
 
     public DamageTaken(FileConfiguration config, TakhtJang main) {
-        this.main = main;
+        DamageTaken.main = main;
         this.config = config;
     }
 

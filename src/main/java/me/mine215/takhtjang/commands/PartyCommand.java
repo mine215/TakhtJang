@@ -2,10 +2,8 @@ package me.mine215.takhtjang.commands;
 
 import me.mine215.takhtjang.TakhtJang;
 import me.mine215.takhtjang.data.GameData;
-import me.mine215.takhtjang.data.Party;
 import me.mine215.takhtjang.data.PartyData;
 import me.mine215.takhtjang.methods.PlayerMethods;
-import me.mine215.takhtjang.types.Team;
 import me.rayzr522.jsonmessage.JSONMessage;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -14,13 +12,15 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
+import java.util.Objects;
+
 public class PartyCommand implements CommandExecutor {
 
     static TakhtJang main;
-    FileConfiguration config;
+    final FileConfiguration config;
 
     public PartyCommand(FileConfiguration config, TakhtJang main) {
-        this.main = main;
+        PartyCommand.main = main;
         this.config = config;
     }
 
@@ -39,7 +39,7 @@ public class PartyCommand implements CommandExecutor {
 
             if (argument.equals("transfer") && args.length >= 2) {
                 if (partyData.getPartyFromMember(player) != null) {
-                    String playerToPromoteName = args[1].toString();
+                    String playerToPromoteName = args[1];
                     Player playerToPromote = player.getServer().getPlayer(playerToPromoteName);
                     if (playerToPromote != null) {
                         me.mine215.takhtjang.data.Party party = partyData.getPartyFromMember(player);
@@ -95,7 +95,7 @@ public class PartyCommand implements CommandExecutor {
                     player.sendMessage(ChatColor.RED + "You are not in a party.");
                 }
             } else if (argument.equals("kick") && args.length >= 2) {
-                String playerToKickName = args[1].toString();
+                String playerToKickName = args[1];
                 Player playerToKick = player.getServer().getPlayer(playerToKickName);
                 if (partyData.getPartyFromMember(player) != null) {
                     if (playerToKick != null) {
@@ -154,7 +154,7 @@ public class PartyCommand implements CommandExecutor {
                     }
                 }
                 Player targetPlayer = player.getServer().getPlayer(argument);
-                if (party.invitePlayer(targetPlayer)) {
+                if (Objects.requireNonNull(party).invitePlayer(targetPlayer)) {
                     player.sendMessage(targetPlayer.getDisplayName() + ChatColor.YELLOW + " has been invited to the party.");
                     JSONMessage.create(player.getDisplayName() + ChatColor.YELLOW + " has invited you to their party, click ").then("HERE").runCommand("/party join " + player.getName()).color(ChatColor.GOLD).then(" to accept.").color(ChatColor.YELLOW).send(targetPlayer);
                 } else {

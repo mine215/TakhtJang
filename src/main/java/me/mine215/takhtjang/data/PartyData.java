@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PartyData {
-    static List<Party> parties = new ArrayList<>();
+    static final List<Party> parties = new ArrayList<>();
 
     public List<Party> getParties() {
         return parties;
@@ -46,11 +46,10 @@ public class PartyData {
         return false;
     }
 
-    public boolean transferParty(Player newOwner) {
+    public void transferParty(Player newOwner) {
         Party party = getPartyFromMember(newOwner);
         if (party != null) {
             party.owner = newOwner;
         }
-        return false;
     }
 }

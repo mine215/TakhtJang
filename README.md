@@ -22,7 +22,7 @@ Make sure to start your MongoDB server every time you want to use the plugin.
 2. In your `server.properties` file specify a world name for your server.
 3. Start your server.
 4. Build the map. Make sure to include all the required locations in the [config tutorial](samples/config_tutorial.md) file.
-5. Use the [config tutorial](samples/config_tutorial.md) to setup the world.
+5. Use the [config tutorial](samples/config_tutorial.md) to set up the world.
 6. Reload your server (Type `reload` into the console or `/reload` if you are an OP).
 
 ## Direct Contact

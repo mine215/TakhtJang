@@ -7,8 +7,8 @@ import java.util.List;
 
 public class Party {
     public Player owner;
-    public List<Player> members = new ArrayList<>();
-    public List<Player> invites = new ArrayList<>();
+    public final List<Player> members = new ArrayList<>();
+    public final List<Player> invites = new ArrayList<>();
 
     public Party(Player ownerIn) {
         owner = ownerIn;

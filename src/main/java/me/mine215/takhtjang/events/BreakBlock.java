@@ -2,7 +2,6 @@ package me.mine215.takhtjang.events;
 
 import me.mine215.takhtjang.TakhtJang;
 import me.mine215.takhtjang.data.GameData;
-import me.mine215.takhtjang.data.PlayerInfo;
 import me.mine215.takhtjang.methods.MDBMethods;
 import me.mine215.takhtjang.types.Stats;
 import me.mine215.takhtjang.types.Team;
@@ -14,15 +13,13 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 
-import java.util.List;
-
 public class BreakBlock implements Listener {
 
     static TakhtJang main;
-    FileConfiguration config;
+    final FileConfiguration config;
 
     public BreakBlock(FileConfiguration config, TakhtJang main) {
-        this.main = main;
+        BreakBlock.main = main;
         this.config = config;
     }
 

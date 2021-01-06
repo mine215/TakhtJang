@@ -3,14 +3,11 @@ package me.mine215.takhtjang.data;
 import me.mine215.takhtjang.TakhtJang;
 import me.mine215.takhtjang.methods.MDBMethods;
 import me.mine215.takhtjang.methods.PlayerMethods;
-import me.mine215.takhtjang.methods.RankMethods;
 import me.mine215.takhtjang.types.Stats;
 import me.mine215.takhtjang.types.Team;
 import me.rayzr522.jsonmessage.JSONMessage;
-import org.apache.commons.lang.ObjectUtils;
 import org.bukkit.*;
 import org.bukkit.block.Block;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -19,12 +16,12 @@ import java.util.List;
 import java.util.Random;
 
 public class PlayerInfo {
-    public Player player;
+    public final Player player;
     public Player lastHit;
     public Team team;
     public boolean isEliminated = false;
     public boolean ironKit = false;
-    public List<Block> blocksPlaced = new ArrayList<>();
+    public final List<Block> blocksPlaced = new ArrayList<>();
     int lastHitAssignee = 0;
 
     public PlayerInfo(Player playerIn, Team teamIn) {
@@ -36,12 +33,10 @@ public class PlayerInfo {
         blocksPlaced.add(block);
     }
 
-    public boolean unregisterBlock(Block block) {
+    public void unregisterBlock(Block block) {
         try {
             blocksPlaced.remove(block);
-            return true;
-        } catch (NullPointerException e) {
-            return false;
+        } catch (NullPointerException ignored) {
         }
     }
 
@@ -71,9 +66,7 @@ public class PlayerInfo {
         if (ironKit) {
             new PlayerMethods().ironKit(player);
         }
-        TakhtJang.scheduleSyncDelayedTask(() -> {
-            player.setHealth(player.getMaxHealth());
-        }, 10);
+        TakhtJang.scheduleSyncDelayedTask(() -> player.setHealth(player.getMaxHealth()), 10);
     }
 
     public void kill() {

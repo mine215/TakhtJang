@@ -2,7 +2,6 @@ package me.mine215.takhtjang.commands;
 
 import me.mine215.takhtjang.TakhtJang;
 import me.mine215.takhtjang.methods.PlayerMethods;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -12,10 +11,10 @@ import org.bukkit.entity.Player;
 public class Hub implements CommandExecutor {
 
     static TakhtJang main;
-    FileConfiguration config;
+    final FileConfiguration config;
 
     public Hub(FileConfiguration config, TakhtJang main) {
-        this.main = main;
+        Hub.main = main;
         this.config = config;
     }
 

@@ -6,7 +6,7 @@ This is a list of all the required locations you need to build your own TakhtJan
 3. 4 Shops
 4. 6 Teleport Pads 
 
-The 6 teleport pads are optional and you can choose to not add them if you toggle `doPortals` to false in the `config`.
+The 6 teleport pads are optional, and you can choose to not add them if you toggle `doPortals` to false in the `config`.
 
 # How to configure your world
 All this is to be done in the `config.yml` file. We *highly* recommend copying one of the sample configs and modifying it to match your world for the most reliable results.
