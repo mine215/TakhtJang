@@ -1,5 +1,5 @@
 # TakhtJang
-A custom game designed for servers that use a child of CraftBukkit as their JAR.
+A custom game designed for servers that use a child of CraftBukkit as their JAR. Tested on Spigot.
 
 # Database setup
 Do this before setting anything else up.
