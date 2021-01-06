@@ -4,19 +4,22 @@ import me.mine215.takhtjang.TakhtJang;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerPickupItemEvent;
+import org.bukkit.event.weather.WeatherChangeEvent;
 
-public class PickupItemEvent implements Listener {
+import java.util.List;
+
+public class WeatherModify implements Listener {
 
     static TakhtJang main;
     FileConfiguration config;
 
-    public PickupItemEvent(FileConfiguration config, TakhtJang main) {
+    public WeatherModify(FileConfiguration config, TakhtJang main) {
         this.main = main;
         this.config = config;
     }
 
     @EventHandler
-    public void onPlayerPickupItem(PlayerPickupItemEvent event) {
+    public void onWeatherChange(WeatherChangeEvent event){
+        event.setCancelled(event.toWeatherState());
     }
 }

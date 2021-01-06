@@ -13,7 +13,7 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 
-public class ResetCommand implements CommandExecutor {
+public class Reset implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {

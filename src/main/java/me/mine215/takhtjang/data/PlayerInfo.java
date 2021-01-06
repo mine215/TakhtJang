@@ -3,6 +3,7 @@ package me.mine215.takhtjang.data;
 import me.mine215.takhtjang.TakhtJang;
 import me.mine215.takhtjang.methods.MDBMethods;
 import me.mine215.takhtjang.methods.PlayerMethods;
+import me.mine215.takhtjang.methods.RankMethods;
 import me.mine215.takhtjang.types.Stats;
 import me.mine215.takhtjang.types.Team;
 import me.rayzr522.jsonmessage.JSONMessage;
@@ -15,6 +16,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class PlayerInfo {
     public Player player;
@@ -23,6 +25,7 @@ public class PlayerInfo {
     public boolean isEliminated = false;
     public boolean ironKit = false;
     public List<Block> blocksPlaced = new ArrayList<>();
+    int lastHitAssignee = 0;
 
     public PlayerInfo(Player playerIn, Team teamIn) {
         player = playerIn;
@@ -74,6 +77,7 @@ public class PlayerInfo {
     }
 
     public void kill() {
+        //player.setLevel((float) (new MDBMethods().getStatDouble(player, Stats.LEVELS) % 100) / 100);
         if (new GameData().getTeam(team) != null) {
             ChatColor teamColor = ChatColor.GOLD;
             switch (team.toString()) {
@@ -172,6 +176,9 @@ public class PlayerInfo {
                 mdbMethods.updateStatsInt(player, Stats.FINAL_DEATHS, 1);
                 PlayerInfo lastPlayer = new GameData().getLastPlayer();
                 if (lastPlayer != null) {
+
+                    // Someone won :))))
+
                     switch (lastPlayer.team.toString()) {
                         case "BLUE":
                             teamColor = ChatColor.BLUE;
@@ -198,6 +205,52 @@ public class PlayerInfo {
                         }
                     }
                     new GameData().resetGame(player);
+
+
+                    // Update level
+                    for (Player playerToUpdate : player.getServer().getOnlinePlayers()) {
+                        // Check system
+                        // a) win (if you win, you get 0.2 levels)
+                        // b) fkdr (over 1 fkdr in game and you get 0.2 levels)
+                        // c) ablr (over 1 ablr (anchor break loss ratio) and you get 0.2 levels)
+                        // d) kdr (over 5 kdr and you get 0.2 levels, as to not promote instant games in 1v1's)
+                        // e) fkdr II (over 3 fkdr you get 0.2 levels to promote playing with a team)
+                        // For ratios, 0 losses/final deaths/deaths counts as 1 as to avoid infinite ratio
+                        int finalKills = mdbMethods.getTempStatInt(playerToUpdate, Stats.FINAL_KILLS);
+                        int finalDeaths = mdbMethods.getTempStatInt(playerToUpdate, Stats.FINAL_DEATHS);
+                        int anchorBreaks = mdbMethods.getTempStatInt(playerToUpdate, Stats.SPAWN_BREAKS);
+                        int anchorLosses = mdbMethods.getTempStatInt(playerToUpdate, Stats.SPAWN_LOSSES);
+                        int kills = mdbMethods.getTempStatInt(playerToUpdate, Stats.KILLS);
+                        int deaths = mdbMethods.getTempStatInt(playerToUpdate, Stats.DEATHS);
+                        boolean didWin = mdbMethods.getTempStatInt(playerToUpdate, Stats.WINS) >= 1;
+
+                        // For ratios, 0 anchor losses/final deaths/deaths counts as 1 as to avoid infinite ratio
+                        if (finalDeaths == 0)
+                            finalDeaths = 1;
+                        if (anchorLosses == 0)
+                            anchorLosses = 1;
+                        if (deaths == 0)
+                            deaths = 1;
+
+                        double levelsToGive = 0;
+
+                        if (didWin)
+                            levelsToGive += 0.2;
+                        if (finalKills / finalDeaths >= 1)
+                            levelsToGive += 0.2;
+                        if (finalKills / finalDeaths >= 3)
+                            levelsToGive += 0.2;
+                        if (anchorBreaks / anchorLosses >= 1)
+                            levelsToGive += 0.2;
+                        if (kills / deaths >= 5)
+                            levelsToGive += 0.2;
+                        mdbMethods.resetTempStats(playerToUpdate);
+
+                        mdbMethods.updateStatsDouble(playerToUpdate, Stats.LEVELS, levelsToGive);
+                        playerToUpdate.sendMessage(ChatColor.AQUA + "You gained " + ChatColor.GOLD + levelsToGive + ChatColor.AQUA + " levels this game!");
+
+                        playerToUpdate.setExp((float) (mdbMethods.getStatDouble(playerToUpdate, Stats.LEVELS) % 100) / 100);
+                    }
                 }
             }
         } else {
@@ -207,8 +260,11 @@ public class PlayerInfo {
 
     public void hitPlayer(Player damager) {
         lastHit = damager;
+        Random rand = new Random();
+        int n = rand.nextInt(51);
+        lastHitAssignee = n;
         TakhtJang.scheduleSyncDelayedTask(() -> {
-            if (lastHit == damager)
+            if (n == lastHitAssignee)
                 lastHit = null;
         }, 140);
     }

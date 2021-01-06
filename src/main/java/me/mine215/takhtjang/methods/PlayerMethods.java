@@ -32,6 +32,8 @@ public class PlayerMethods {
         } catch (NullPointerException e) {
             gameData.addPlayer(player, null);
         }
+
+        new RankMethods().updateVisualRank(player);
     }
 
     public double distanceFromCoord(Location base, Location target) {

@@ -12,12 +12,12 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 
-public class PlaceBlockEvent implements Listener {
+public class PlaceBlock implements Listener {
 
     static TakhtJang main;
     FileConfiguration config;
 
-    public PlaceBlockEvent(FileConfiguration config, TakhtJang main) {
+    public PlaceBlock(FileConfiguration config, TakhtJang main) {
         this.main = main;
         this.config = config;
     }

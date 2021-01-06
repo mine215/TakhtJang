@@ -16,12 +16,12 @@ import org.bukkit.event.block.BlockBreakEvent;
 
 import java.util.List;
 
-public class BreakBlockEvent implements Listener {
+public class BreakBlock implements Listener {
 
     static TakhtJang main;
     FileConfiguration config;
 
-    public BreakBlockEvent(FileConfiguration config, TakhtJang main) {
+    public BreakBlock(FileConfiguration config, TakhtJang main) {
         this.main = main;
         this.config = config;
     }

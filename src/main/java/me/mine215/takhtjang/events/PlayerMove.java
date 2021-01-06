@@ -3,29 +3,26 @@ package me.mine215.takhtjang.events;
 import me.mine215.takhtjang.TakhtJang;
 import me.mine215.takhtjang.data.GameData;
 import me.mine215.takhtjang.methods.PlayerMethods;
-import me.rayzr522.jsonmessage.JSONMessage;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class PlayerMoveEvent implements Listener {
+public class PlayerMove implements Listener {
 
     static TakhtJang main;
     FileConfiguration config;
 
     public static List<Player> playersOnPortals = new ArrayList<>();
 
-    public PlayerMoveEvent(FileConfiguration config, TakhtJang main) {
-        PlayerMoveEvent.main = main;
+    public PlayerMove(FileConfiguration config, TakhtJang main) {
+        me.mine215.takhtjang.events.PlayerMove.main = main;
         this.config = config;
     }
 

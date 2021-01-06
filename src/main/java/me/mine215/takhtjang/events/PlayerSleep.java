@@ -8,12 +8,12 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerBedEnterEvent;
 
-public class PlayerSleepEvent implements Listener {
+public class PlayerSleep implements Listener {
 
     static TakhtJang main;
     FileConfiguration config;
 
-    public PlayerSleepEvent(FileConfiguration config, TakhtJang main) {
+    public PlayerSleep(FileConfiguration config, TakhtJang main) {
         this.main = main;
         this.config = config;
     }

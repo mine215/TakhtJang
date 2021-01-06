@@ -42,7 +42,7 @@ public class PartyCommand implements CommandExecutor {
                     String playerToPromoteName = args[1].toString();
                     Player playerToPromote = player.getServer().getPlayer(playerToPromoteName);
                     if (playerToPromote != null) {
-                        Party party = partyData.getPartyFromMember(player);
+                        me.mine215.takhtjang.data.Party party = partyData.getPartyFromMember(player);
                         if (party.owner.equals(player)) {
                             partyData.transferParty(playerToPromote);
                             player.sendMessage(ChatColor.YELLOW + "The party has been transferred to " + party.owner.getDisplayName());
@@ -74,7 +74,7 @@ public class PartyCommand implements CommandExecutor {
                     player.sendMessage(ChatColor.RED + "You are not in a party.");
                 }
             } else if (argument.equals("leave")) {
-                Party party = partyData.getPartyFromMember(player);
+                me.mine215.takhtjang.data.Party party = partyData.getPartyFromMember(player);
                 if (party != null) {
                     if (party.owner.equals(player)) {
                         party.kickFromParty(player);
@@ -132,7 +132,7 @@ public class PartyCommand implements CommandExecutor {
                 String ownerName = args[1].toLowerCase();
                 Player owner = player.getServer().getPlayer(ownerName);
                 if (owner != null) {
-                    Party party = partyData.getPartyFromOwner(owner);
+                    me.mine215.takhtjang.data.Party party = partyData.getPartyFromOwner(owner);
                     if (party != null) {
                         if (party.joinParty(player)) {
                             player.sendMessage(ChatColor.YELLOW + "You joined " + owner.getDisplayName() + "'s " + ChatColor.YELLOW + "party!");
@@ -146,7 +146,7 @@ public class PartyCommand implements CommandExecutor {
                     player.sendMessage(ChatColor.RED + ownerName + " is not online.");
                 }
             } else {
-                Party party = partyData.getPartyFromOwner(player);
+                me.mine215.takhtjang.data.Party party = partyData.getPartyFromOwner(player);
                 if (party == null) {
                     party = partyData.createParty(player);
                     if (party == null) {

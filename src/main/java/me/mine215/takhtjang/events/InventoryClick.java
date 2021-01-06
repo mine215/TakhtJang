@@ -20,12 +20,12 @@ import org.bukkit.inventory.meta.SkullMeta;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InventoryClickEvent implements Listener {
+public class InventoryClick implements Listener {
 
     static TakhtJang main;
     FileConfiguration config;
 
-    public InventoryClickEvent(FileConfiguration config, TakhtJang main) {
+    public InventoryClick(FileConfiguration config, TakhtJang main) {
         this.main = main;
         this.config = config;
     }

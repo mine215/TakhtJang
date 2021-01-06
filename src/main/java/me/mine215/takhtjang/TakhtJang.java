@@ -1,7 +1,5 @@
 package me.mine215.takhtjang;
 
-import com.mongodb.Mongo;
-import jdk.jfr.internal.tool.Main;
 import me.mine215.takhtjang.commands.*;
 import me.mine215.takhtjang.events.*;
 import me.mine215.takhtjang.types.Team;
@@ -13,7 +11,6 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,32 +33,35 @@ public final class TakhtJang extends JavaPlugin {
             this.saveDefaultConfig();
         }
 
-        getCommand("kit").setExecutor(new KitCommand());
-        getCommand("hub").setExecutor(new HubCommand(config, this));
-        getCommand("shop").setExecutor(new ShopCommand());
-        getCommand("join").setExecutor(new JoinCommand());
-        getCommand("reset").setExecutor(new ResetCommand());
-        getCommand("togglegen").setExecutor(new ToggleResCommand());
-        getCommand("play").setExecutor(new PlayCommand());
+        getCommand("kit").setExecutor(new Kit());
+        getCommand("hub").setExecutor(new Hub(config, this));
+        getCommand("shop").setExecutor(new Shop());
+        getCommand("join").setExecutor(new Join());
+        getCommand("reset").setExecutor(new Reset());
+        getCommand("togglegen").setExecutor(new ToggleGenerator());
+        getCommand("play").setExecutor(new Play());
         getCommand("party").setExecutor(new PartyCommand(config, this));
         getCommand("p").setExecutor(new PartyCommand(config, this));
+        getCommand("rank").setExecutor(new Rank(config, this));
+        getCommand("permission").setExecutor(new Permission(config, this));
 
-        getServer().getPluginManager().registerEvents(new PlayerMoveEvent(config, this), this);
-        getServer().getPluginManager().registerEvents(new InventoryClickEvent(config, this), this);
-        getServer().getPluginManager().registerEvents(new PickupItemEvent(config, this), this);
-        getServer().getPluginManager().registerEvents(new WeatherModifyEvent(config, this), this);
-        getServer().getPluginManager().registerEvents(new DamageTakenEvent(config, this), this);
-        getServer().getPluginManager().registerEvents(new PlaceBlockEvent(config, this), this);
-        getServer().getPluginManager().registerEvents(new BreakBlockEvent(config, this), this);
-        getServer().getPluginManager().registerEvents(new PlayerSleepEvent(config, this), this);
-        getServer().getPluginManager().registerEvents(new PlayerInteractEvent(config, this), this);
+        getServer().getPluginManager().registerEvents(new PlayerMove(config, this), this);
+        getServer().getPluginManager().registerEvents(new InventoryClick(config, this), this);
+        getServer().getPluginManager().registerEvents(new PickupItem(config, this), this);
+        getServer().getPluginManager().registerEvents(new WeatherModify(config, this), this);
+        getServer().getPluginManager().registerEvents(new DamageTaken(config, this), this);
+        getServer().getPluginManager().registerEvents(new PlaceBlock(config, this), this);
+        getServer().getPluginManager().registerEvents(new BreakBlock(config, this), this);
+        getServer().getPluginManager().registerEvents(new PlayerSleep(config, this), this);
+        getServer().getPluginManager().registerEvents(new PlayerInteract(config, this), this);
+        getServer().getPluginManager().registerEvents(new PlayerChat(config, this), this);
+        getServer().getPluginManager().registerEvents(new PlayerJoin(config, this), this);
         getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "[TakhtJang]: Plugin is enabled!");
 
         double genMult = config.getDouble("genMultiplier");
 
         schedule(() -> {
             if (shouldSpawnRes) {
-                Location spawnLoc;
                 List<Team> teamList = new ArrayList();
                 teamList.add(Team.RED);
                 teamList.add(Team.BLUE);
@@ -72,14 +72,12 @@ public final class TakhtJang extends JavaPlugin {
                     double y = TakhtJang.getInstance().getConfig().getDouble("worldData.bases." + team.toString().toLowerCase() + ".y");
                     double z = TakhtJang.getInstance().getConfig().getDouble("worldData.bases." + team.toString().toLowerCase() + ".z");
                     String worldName = config.getString("worldData.worldName");
-                    spawnLoc = new Location(Bukkit.getServer().getWorld(worldName), x, y, z);
                     Bukkit.getServer().getWorld(worldName).dropItem(new Location(Bukkit.getServer().getWorld(worldName), x, y, z), new ItemStack(Material.IRON_INGOT));
                 }
             }
             }, (int) (80 / genMult));
         schedule(() -> {
             if (shouldSpawnRes) {
-                Location spawnLoc;
                 List<Team> teamList = new ArrayList();
                 teamList.add(Team.RED);
                 teamList.add(Team.BLUE);
@@ -90,7 +88,6 @@ public final class TakhtJang extends JavaPlugin {
                     double y = TakhtJang.getInstance().getConfig().getDouble("worldData.bases." + team.toString().toLowerCase() + ".y");
                     double z = TakhtJang.getInstance().getConfig().getDouble("worldData.bases." + team.toString().toLowerCase() + ".z");
                     String worldName = config.getString("worldData.worldName");
-                    spawnLoc = new Location(Bukkit.getServer().getWorld(worldName), x, y, z);
                     Bukkit.getServer().getWorld(worldName).dropItem(new Location(Bukkit.getServer().getWorld(worldName), x, y, z), new ItemStack(Material.GOLD_INGOT));
                 }
             }

@@ -1,6 +1,7 @@
 package me.mine215.takhtjang.events;
 
 import me.mine215.takhtjang.TakhtJang;
+import me.mine215.takhtjang.methods.LevelMethods;
 import me.mine215.takhtjang.methods.MDBMethods;
 import me.mine215.takhtjang.types.Stats;
 import org.bukkit.Bukkit;
@@ -9,27 +10,23 @@ import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-public class PlayerInteractEvent implements Listener {
+public class PlayerInteract implements Listener {
 
     static TakhtJang main;
     FileConfiguration config;
 
     public static List<Player> playersOnPortals = new ArrayList<>();
 
-    public PlayerInteractEvent(FileConfiguration config, TakhtJang main) {
-        PlayerMoveEvent.main = main;
+    public PlayerInteract(FileConfiguration config, TakhtJang main) {
+        me.mine215.takhtjang.events.PlayerMove.main = main;
         this.config = config;
     }
 
@@ -47,6 +44,16 @@ public class PlayerInteractEvent implements Listener {
                         blockMeta.setDisplayName(ChatColor.GOLD + "Your Stats");
                         List<String> lore = new ArrayList<>();
                         MDBMethods mdbMethods = new MDBMethods();
+
+                        String levelStringToSplit = String.valueOf(mdbMethods.getStatDouble(player, Stats.LEVELS));
+                        String decimalOfLevel = levelStringToSplit.substring(levelStringToSplit.indexOf(".")).replace("0", "").replace(".", "");
+                        int percentToNextLevel = 0;
+                        if (!decimalOfLevel.equals("")) {
+                            percentToNextLevel = Integer.parseInt(decimalOfLevel) * 10;
+                        }
+                        String levelString = new LevelMethods().getFormattedLevel(player) + ChatColor.GOLD + " (" + percentToNextLevel + "% to next level" + ")";
+
+                        lore.add(ChatColor.GOLD + "Level: " + levelString);
                         lore.add(ChatColor.GRAY + "Final Kills: " + ChatColor.GREEN + mdbMethods.getStatInt(player, Stats.FINAL_KILLS));
                         lore.add(ChatColor.GRAY + "Final Deaths: " + ChatColor.RED + mdbMethods.getStatInt(player, Stats.FINAL_DEATHS));
                         lore.add(ChatColor.GRAY + "Kills: " + ChatColor.GREEN + mdbMethods.getStatInt(player, Stats.KILLS));

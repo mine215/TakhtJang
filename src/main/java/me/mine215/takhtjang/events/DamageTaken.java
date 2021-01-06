@@ -16,12 +16,12 @@ import org.bukkit.inventory.ItemStack;
 import java.util.Arrays;
 import java.util.List;
 
-public class DamageTakenEvent implements Listener {
+public class DamageTaken implements Listener {
 
     static TakhtJang main;
     FileConfiguration config;
 
-    public DamageTakenEvent(FileConfiguration config, TakhtJang main) {
+    public DamageTaken(FileConfiguration config, TakhtJang main) {
         this.main = main;
         this.config = config;
     }
